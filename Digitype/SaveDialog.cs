@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Digitype
 {
     public partial class SaveDialog : Form
     {
-        private string filename;
+        private readonly string filename;
         public SaveDialog(string filename)
         {
             InitializeComponent();
@@ -25,17 +19,17 @@ namespace Digitype
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-
+            DialogResult = DialogResult.Yes;
         }
 
         private void btnDontSave_Click(object sender, EventArgs e)
         {
-
+            DialogResult = DialogResult.No;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-
+            DialogResult = DialogResult.Cancel;
         }
     }
 }
