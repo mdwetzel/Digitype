@@ -60,7 +60,19 @@ namespace Digitype
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (NeedsToSave()) {
-                PromptSaveFile();
+                switch (PromptSaveFile()) {
+                    case DialogResult.Yes:
+                        OpenSaveDialog();
+                        OpenDialog();
+                        break;
+                    case DialogResult.No:
+                        OpenDialog();
+                        return;
+                    case DialogResult.Cancel:
+                        break;
+                }
+            } else {
+                OpenDialog();
             }
         }
 
@@ -70,6 +82,16 @@ namespace Digitype
                 OpenSaveDialog();
             } else {
                 SaveFile();
+            }
+        }
+
+        private void OpenDialog()
+        {
+            using (openFileDialog = new OpenFileDialog()) {
+                if (openFileDialog.ShowDialog() == DialogResult.OK) {
+                    CreateNewFile();
+                    rchPad.Text = File.ReadAllText(openFileDialog.FileName);
+                }
             }
         }
 
